@@ -1,4 +1,23 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
+import { authService } from "fbase";
+import { useHistory } from "react-router-dom";
 
-export default () => <span>Profile</span>
+export default () => {
+
+    const history = useHistory();
+
+    const onLogOutClick = () => {
+
+        authService.signOut();
+        history.push("/");
+
+    };
+
+
+    return (
+        <>
+            <button onClick={onLogOutClick}>Log Out</button>
+        </>
+    )
+}
