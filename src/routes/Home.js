@@ -35,6 +35,9 @@ const Home = ({ userObj }) => {
 
         dbService.collection("nweets").onSnapshot((snapshot) => {
 
+            console.log("snapshot");
+            console.log(snapshot);
+
             const nweetArray = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
             console.log(nweetArray);
@@ -76,10 +79,28 @@ const Home = ({ userObj }) => {
 
     }
 
+    const onFileChange = (event) => {
+
+        const { target: { files } } = event;
+        const theFile = files[0];
+
+        console.log(theFile);
+
+
+
+        const reader = new FileReader();
+
+        reader.onloadend = (finishedEvent) => {
+            console.log(finishedEvent);
+        }
+        reader.readAsDataURL(theFile);
+    }
+
     return (
         <div>
             <form onSubmit={onSubmit}>
                 <input type="text" placeholder="what's on your mind?" maxLength={120} onChange={onChange} value={nweet} />
+                <input type="file" accept="image/*" onChange={onFileChange} />
                 <input type="submit" value="Nweet" />
             </form>
 

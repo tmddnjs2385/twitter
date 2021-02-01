@@ -30,7 +30,7 @@ function App() {
 
     <>
       {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Initializing..."}
-      <footer>&copy;{new Date().getFullYear()}twitter</footer>
+      <footer>&copy;{new Date().getFullYear()}ki MUSIUM</footer>
     </>
 
   );
