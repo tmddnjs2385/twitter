@@ -8,10 +8,12 @@ import Nweet from "components/Nweet";
 
 
 const Home = ({ userObj }) => {
+
     //  console.log("userObj")
     // console.log(userObj);
 
     const [nweet, setNweet] = useState("");
+
     const [nweets, setNweets] = useState([]);
 
     const [attachment, setAttachment] = useState();
@@ -67,6 +69,7 @@ const Home = ({ userObj }) => {
         let attachmentUrl;
 
         if (attachment !== "") {
+
             const fileRef = storageService.ref().child(`${userObj.uid}/${uuid4()}`);
 
             const response = await fileRef.putString(attachment, 'data_url');

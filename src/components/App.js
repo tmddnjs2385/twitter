@@ -18,7 +18,9 @@ function App() {
         setIsLoggedIn(true);
         setUserObj(user);
       } else {
+
         setIsLoggedIn(false);
+
       }
       setInit(true);
     })
@@ -27,7 +29,6 @@ function App() {
   console.log(isLoggedIn);
 
   return (
-
     <>
       {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Initializing..."}
       <footer>&copy;{new Date().getFullYear()}ki MUSIUM</footer>
