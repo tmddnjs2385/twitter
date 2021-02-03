@@ -16,7 +16,7 @@ const Home = ({ userObj }) => {
 
     const [nweets, setNweets] = useState([]);
 
-    const [attachment, setAttachment] = useState();
+    const [attachment, setAttachment] = useState(null);
 
     const getNweets = async () => {
 
@@ -66,27 +66,41 @@ const Home = ({ userObj }) => {
 
         event.preventDefault();
 
-        let attachmentUrl;
+        //  let attachmentUrl;
 
-        if (attachment !== "") {
+        let nweetObj = {};
+
+        if (attachment !== null) {
 
             const fileRef = storageService.ref().child(`${userObj.uid}/${uuid4()}`);
 
             const response = await fileRef.putString(attachment, 'data_url');
 
-            attachmentUrl = await response.ref.getDownloadURL();
+            const attachmentUrl = await response.ref.getDownloadURL();
+
+
+            nweetObj = {
+                text: nweet,
+                createdAt: Date.now(),
+                creatorId: userObj.uid,
+                attachmentUrl,
+            }
 
             // console.log(response);
+        } else {
+
+            nweetObj = {
+                text: nweet,
+                createdAt: Date.now(),
+                creatorId: userObj.uid,
+
+            }
+
         }
 
 
 
-        const nweetObj = {
-            text: nweet,
-            createdAt: Date.now(),
-            creatorId: userObj.uid,
-            attachmentUrl,
-        }
+
 
         await dbService.collection("nweets").add(nweetObj);
 
